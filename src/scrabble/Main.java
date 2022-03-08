@@ -12,7 +12,7 @@ public class Main {
         board.fillBag();
 
         // Reads in dictionary scanner new file (args[0])
-        File dictionary = new File("src/scrabble/lexicon.txt");
+        File dictionary = new File(args[0]);
         Scanner scanner = new Scanner(dictionary);
         while (scanner.hasNext()) {
             String word = scanner.next();
@@ -20,8 +20,12 @@ public class Main {
         }
 
         Player player = new Player(board, trie);
+        board.createBoard();
+        // TODO: change while to check for win condition
+        while (true) {
+            board.printSimpleBoard();
+            player.playTurn();
+        }
 
-        board.readBoard();
-        board.printBoard1();
     }
 }

@@ -20,6 +20,20 @@ public class Square {
         return tile;
     }
 
+    public void setTile(Tile tile) {
+        this.tile = tile;
+    }
+
+    public int multiplyWords() {
+        if (isWordMultiplier) return multiplier;
+        else return 1;
+    }
+
+    public int multiplyLetter() {
+        if (isWordMultiplier) return 1;
+        else return multiplier;
+    }
+
     public int getMultiplier() {
         return multiplier;
     }
