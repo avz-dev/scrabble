@@ -23,8 +23,8 @@ public class Player {
         Tile tile;
         boolean connects = false;
         char direction, cont;
-        int tileIndex, row, col, boardIndex, startRow, startCol;
-        int score = 0, crossScore = 0, wordMultiplier = 1;
+        int tileIndex, row, col, boardIndex, startCol;
+        int score = 0, wordMultiplier = 1;
         Square square;
         printRack();
 
@@ -44,10 +44,9 @@ public class Player {
                 }
             }
         } while (row > board.getBoardSize() || col > board.getBoardSize() || row < 0 || col < 0
-                || board.getBoardSpace(row,col).getTile() != null);
+                || board.getBoardTile(row,col) != null);
 
         square = board.getBoardSpace(row, col);
-        startRow = row;
         startCol = col;
 
         // Prompt user for word direction
@@ -56,25 +55,20 @@ public class Player {
             direction = scnr.next().charAt(0);
         } while (direction != 'a' && direction != 'd');
 
-        if (direction == 'a') {
-            while (col != 0 && board.getBoardSpace(row, col - 1).getTile() != null) col--;
-            boardIndex = col;
-            while (col != startCol) {
-                word += board.getBoardSpace(row, col).getTile().getLetter();
-                col++;
-                connects = true;
-            }
-        } else {
-            while (row != 0 && board.getBoardSpace(row-1,col).getTile() != null) row--;
-            boardIndex = row;
-            while (row != startRow) {
-                word += board.getBoardSpace(row, col).getTile().getLetter();
-                row++;
-                connects = true;
-            }
+        ///////
+        if (direction == 'd') {
+            board.transposeBoard();
+            int temp = row;
+            row = col;
+            col = temp;
         }
+        boardIndex = col;
+        int wordLength = word.length();
+        word = something(row, col, startCol, word);
+        if (word.length() != wordLength) connects = true;
 
         do {
+            int crossScore = 0;
             // Prompt user to select a tile
             printRack();
             System.out.println("Select a tile:");
@@ -102,28 +96,23 @@ public class Player {
             rack.remove(tile);
             wordMultiplier *= square.multiplyWords();
 
-//            board.printSimpleBoard();
-
-            crossScore += crossCheck(direction,row,col, square, tile);
+            crossScore += crossCheck(row,col,square);
             if (crossScore == 0) {
                 break; // Do I want this??
             } else if (crossScore != -1) {
                 score += crossScore;
                 connects = true;
             }
-            crossScore = 0;
 
-            if (direction == 'a') col++;
-            else row++;
+            col++;
 
-            if (row >= board.getBoardSize() || col >= board.getBoardSize()) break;
+            if (col >= board.getBoardSize()) break;
             square = board.getBoardSpace(row,col);
 
-            while (square.getTile() != null) {
-                word += square.getTile().getLetter();
-                score += (square.getTile().getPoints()*square.multiplyLetter());
-                if (direction == 'a') col++;
-                else row++;
+            while (!square.isEmpty()) {
+                word += square.getLetter();
+                score += (square.getPoints()*square.multiplyLetter());
+                col++;
                 square = board.getBoardSpace(row,col);
                 connects = true;
             }
@@ -137,7 +126,7 @@ public class Player {
         if ((word.length() + boardIndex) > board.getBoardSize()) {
             System.out.println(word+" does not fit on board");
             undoTurn(wordTiles, wordSquares);
-        } else if (!trie.traverseTrie(word)) {
+        } else if (!trie.traverseTrie(word) && word.length() != 1) {
             System.out.println(word + " is not a word");
             undoTurn(wordTiles, wordSquares);
         } else if (!connects) {
@@ -150,45 +139,52 @@ public class Player {
         }
     }
 
-    public int crossCheck(char dir, int row, int col, Square square, Tile tile) {
-        Square crossSquare = square;
-        Tile currentTile;
+    public String something(int i, int j, int startCol, String word) {
+        while (j != 0 && board.getBoardTile(i, j-1) != null) j--;
+        while (j != startCol) {
+            word += board.getBoardSpace(i, j).getTile().getLetter();
+            j++;
+        }
+        return word;
+    }
+
+    private int crossCheck(int i, int j, Square square) {
+        int result1 = crossCheckHelper(i,j,square);
+        board.transposeBoard();
+        int result2 = crossCheckHelper(j,i,square);
+        board.transposeBoard();
+
+        if (result1 < 0 || result2 < 0) return -1;
+        else if (result1 == 0 || result2 == 0) return 0;
+        else return result1+result2;
+    }
+
+    private int crossCheckHelper(int i, int j, Square square) {
+        Square crossSquare;
         String word = "";
         int score = 0;
-        int wordMultiplier = crossSquare.multiplyWords();
+        int wordMultiplier = square.multiplyWords();
 
-        if (dir == 'a') {
-            do {
-                row--;
-                if (row < 0) break;
-                crossSquare = board.getBoardSpace(row, col);
-            } while (crossSquare.getTile() != null);
-            row++;
-        } else {
-            do {
-                col--;
-                if (col < 0) break;
-                crossSquare = board.getBoardSpace(row, col);
-            } while (crossSquare.getTile() != null);
-            col++;
-        }
-        crossSquare = board.getBoardSpace(row, col);
+        do {
+            i--;
+            if (i < 0) break;
+            crossSquare = board.getBoardSpace(i, j);
+        } while (!crossSquare.isEmpty());
+        i++;
+
+        crossSquare = board.getBoardSpace(i, j);
 
         do {
             if (crossSquare == square) {
-                currentTile = tile;
-                score += currentTile.getPoints()*crossSquare.multiplyLetter();
+                score += crossSquare.getPoints()*crossSquare.multiplyLetter();
             } else {
-                currentTile = crossSquare.getTile();
-                score += currentTile.getPoints();
+                score += crossSquare.getPoints();
             }
-            word += currentTile.getLetter();
-            if (dir == 'a') row++;
-            else col++;
-            if (col >= board.getBoardSize() || row >= board.getBoardSize()) break;
-            crossSquare = board.getBoardSpace(row,col);
-            currentTile = crossSquare.getTile();
-        } while (currentTile != null);
+            word += crossSquare.getLetter();
+            i++;
+            if (i >= board.getBoardSize()) break;
+            crossSquare = board.getBoardSpace(i,j);
+        } while (!crossSquare.isEmpty());
 
         System.out.println(word+" "+word.length());
         if (word.length() == 1) {
@@ -200,6 +196,7 @@ public class Player {
             return 0;
         }
     }
+
 
     public void undoTurn(LinkedList<Tile> wordTiles, LinkedList<Square> wordSquares) {
         for (Tile tile : wordTiles) {

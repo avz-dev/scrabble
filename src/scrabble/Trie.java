@@ -29,6 +29,18 @@ public class Trie {
         return root;
     }
 
+    public TrieNode findNode(String word) {
+        TrieNode current = root;
+
+        if (word.equals("")) return root;
+        for (int i = 0; i < word.length(); i++) {
+            current = current.getNode(word.toLowerCase().charAt(i));
+        }
+        return current;
+    }
+
+    public TrieNode getRoot() { return root; }
+
     public boolean traverseTrie (String word) {
         TrieNode current = root;
         int i;

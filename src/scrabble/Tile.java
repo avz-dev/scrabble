@@ -14,13 +14,18 @@ public class Tile {
     public char getLetter() { return letter; }
 
     public char printLetter() {
-        if (blank) return (char)((int) letter - 32);
+        if (blank && letter != '_') return (char)((int) letter - 32);
         else return letter;
     }
 
     public int getPoints() { return points; }
 
     public boolean isBlank() { return blank; }
+
+    @Override
+    public String toString() {
+        return ""+letter;
+    }
 
     public void setLetter(char letter) { this.letter = letter; }
 }

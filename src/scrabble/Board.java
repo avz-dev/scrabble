@@ -12,11 +12,12 @@ public class Board {
     int[] tilePoints = {1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4, 10, 0};
     private final int RACK_SIZE = 7;
     private final int ABC_MIN = 97;
+    private final int BONUS = 50;
     private int boardSize, center;
     private boolean isEmpty = true;
 
     // Reads in and generates board from user input
-    public void readBoard(File file) throws IOException {
+    public LinkedList<Tile> readBoard(File file) throws IOException {
         Scanner scanner = new Scanner(file);
         boardSize = scanner.nextInt();
         center = boardSize/2;
@@ -30,27 +31,36 @@ public class Board {
                     letter = input.charAt(0);
                     index = letter - ABC_MIN;
                     if (letter < ABC_MIN) {
-                        boardSpace[i][j] = new Square(1, new Tile((char)letter, 0));
+                        boardSpace[i][j] = new Square(1, new Tile((char)letter, 0), false, i, j);
                     } else {
-                        boardSpace[i][j] = new Square(1, new Tile((char)letter, tilePoints[index]));
+                        boardSpace[i][j] = new Square(1, new Tile((char)letter, tilePoints[index]), false, i, j);
                     }
                 } else if (input.charAt(0) == '.') {
                     if (input.charAt(1) == '.') {
-                        boardSpace[i][j] = new Square(1, null);
+                        boardSpace[i][j] = new Square(1, null, false, i, j);
                     } else {
-                        boardSpace[i][j] = new Square(input.charAt(1) - 48, null, false);
+                        boardSpace[i][j] = new Square(input.charAt(1) - 48, null, false, i, j);
                     }
                 } else {
-                    boardSpace[i][j] = new Square(input.charAt(0) - 48, null, true);
+                    boardSpace[i][j] = new Square(input.charAt(0) - 48, null, true, i, j);
                 }
             }
         }
+        if (scanner.hasNext()) return readRack(scanner.next());
+        else return null;
+    }
+
+    public LinkedList<Tile> readRack(String word) {
+        LinkedList<Tile> rack = new LinkedList<>();
+        for (int i = 0; i < getRACK_SIZE(); i++) {
+            rack.add(new Tile(word.charAt(i),tilePoints[word.charAt(i) - ABC_MIN]));
+        }
+        return rack;
     }
 
     // Creates standard scrabble board
     public void createBoard() throws IOException {
-//        readBoard(new File("src/scrabble/standard-board.txt"));
-        readBoard(new File("src/scrabble/test.txt"));
+        readBoard(new File("src/scrabble/standard-board.txt"));
     }
 
     public void printBoard() {
@@ -80,7 +90,11 @@ public class Board {
     public void printSimpleBoard() {
         Tile tile;
         Square square;
-        System.out.println("   0  1  2  3  4  5  6  7  8  9 10 11 12 13 14");
+        System.out.print(" ");
+        for (int i = 0; i < boardSize; i++) {
+            System.out.print("  "+i);
+        }
+        System.out.println();
         for (int i = 0; i < boardSize; i++) {
             System.out.print(i+" ");
             if (i < 10) System.out.print(" ");
@@ -93,6 +107,48 @@ public class Board {
                     System.out.print(tile.printLetter());
                 }
                 System.out.print("  ");
+            }
+            System.out.println();
+        }
+    }
+
+    public void printAnchorBoard() {
+        Square square;
+        System.out.print(" ");
+        for (int i = 0; i < boardSize; i++) {
+            System.out.print("  "+i);
+        }
+        System.out.println();
+        for (int i = 0; i < boardSize; i++) {
+            System.out.print(i+" ");
+            if (i < 10) System.out.print(" ");
+            for (int j = 0; j < boardSize; j++) {
+                square = boardSpace[i][j];
+                if (square.isAnchor()) {
+                    System.out.print("⚓︎ ");
+                } else if (square.isEmpty()){
+                    System.out.print(". ");
+                } else {
+                    System.out.print(square.getLetter()+" ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    public void printSquares() {
+        Square square;
+        System.out.print(" ");
+        for (int i = 0; i < boardSize; i++) {
+            System.out.print("  "+i);
+        }
+        System.out.println();
+        for (int i = 0; i < boardSize; i++) {
+            System.out.print(i+" ");
+            if (i < 10) System.out.print(" ");
+            for (int j = 0; j < boardSize; j++) {
+                square = boardSpace[i][j];
+                System.out.print(square.toString()+" ");
             }
             System.out.println();
         }
@@ -120,13 +176,73 @@ public class Board {
         boardSpace[row][col].setTile(tile);
     }
 
+    public void transposeBoard() {
+        Square[][] transposedBoard = new Square[boardSize][boardSize];
+        for(int j = 0; j < boardSize; j++) {
+            for(int i = 0; i < boardSize; i++) {
+                boardSpace[i][j].transposeSquare();
+                transposedBoard[j][i] = boardSpace[i][j];
+            }
+        }
+        boardSpace = transposedBoard;
+    }
+
+    public void findAnchors() {
+        Square square;
+        for (int i = 0; i < boardSize; i++) {
+            for (int j = 0; j < boardSize; j++) {
+                square = boardSpace[i][j];
+                if (square.isEmpty() &&
+                    ((getRightSquare(square) != null && !getRightSquare(square).isEmpty()) ||
+                    (getLeftSquare(square) != null && !getLeftSquare(square).isEmpty()) ||
+                    (getTopSquare(square) != null && !getTopSquare(square).isEmpty()) ||
+                    (getBottomSquare(square) != null && !getBottomSquare(square).isEmpty()))) {
+                    square.setAnchor(true);
+                } else {
+                    square.setAnchor(false);
+                }
+            }
+        }
+    }
+
     public int getRACK_SIZE() { return RACK_SIZE; }
 
     public int getBoardSize() { return boardSize; }
+
+    public boolean isSquareEmpty(int i, int j) { return boardSpace[i][j].isEmpty(); }
+
+    public Tile getBoardTile(int i, int j) { return boardSpace[i][j].getTile(); }
 
     public Square getBoardSpace(int i, int j) { return boardSpace[i][j]; }
 
     public boolean isEmpty() { return isEmpty; }
 
     public int getCenter() { return center; }
+
+    public Square getTopSquare(Square square) {
+        if (square.getRow()-1 < 0) return null;
+        else return boardSpace[square.getRow()-1][square.getCol()];
+    }
+
+    public Square getBottomSquare(Square square) {
+        if (square.getRow()+1 >= boardSize) return null;
+        else return boardSpace[square.getRow()+1][square.getCol()];
+    }
+
+    public Square getRightSquare(Square square) {
+        if (square.getCol()+1 >= boardSize) return null;
+        else return boardSpace[square.getRow()][square.getCol()+1];
+    }
+
+    public Square getLeftSquare(Square square) {
+        if (square.getCol()-1 < 0) return null;
+        else return boardSpace[square.getRow()][square.getCol()-1];
+    }
+
+    public boolean isSquareAnchor(int i, int j) {
+        return boardSpace[i][j].isAnchor();
+    }
+
+    public int getBONUS() { return BONUS; }
+
 }
