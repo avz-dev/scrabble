@@ -7,7 +7,6 @@ public class TrieNode {
     char letter;
     HashMap<Character, TrieNode> childNodes = new HashMap<>();
 
-    // Delete?
     public TrieNode() {
 
     }
@@ -23,10 +22,6 @@ public class TrieNode {
 
     public TrieNode getNode(char letter) {
         return childNodes.get(letter);
-    }
-
-    public boolean isNextNode(char letter) {
-        return childNodes.containsKey(letter);
     }
 
     public boolean isTerminal() {

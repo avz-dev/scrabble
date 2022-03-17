@@ -1,7 +1,5 @@
 package scrabble;
 
-import java.util.Locale;
-
 public class Trie {
     private TrieNode root;
 
@@ -14,7 +12,7 @@ public class Trie {
         TrieNode current = root;
         boolean isTerminal;
         char letter;
-        word.toLowerCase(Locale.ROOT);
+        word.toLowerCase();
         for (int i = 0; i < word.length(); i++) {
             letter = word.charAt(i);
             isTerminal = i == (word.length() - 1);
@@ -49,6 +47,6 @@ public class Trie {
             current = current.getNode(word.charAt(i));
             if (current == null) break;
         }
-        return i == word.length() && current.terminalNode;
+        return current != null && current.terminalNode;
     }
 }

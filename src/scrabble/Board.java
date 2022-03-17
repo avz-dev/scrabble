@@ -15,6 +15,7 @@ public class Board {
     private final int BONUS = 50;
     private int boardSize, center;
     private boolean isEmpty = true;
+    boolean isTransposed = false;
 
     // Reads in and generates board from user input
     public LinkedList<Tile> readBoard(File file) throws IOException {
@@ -53,7 +54,8 @@ public class Board {
     public LinkedList<Tile> readRack(String word) {
         LinkedList<Tile> rack = new LinkedList<>();
         for (int i = 0; i < getRACK_SIZE(); i++) {
-            rack.add(new Tile(word.charAt(i),tilePoints[word.charAt(i) - ABC_MIN]));
+            if (word.charAt(i) == '*') rack.add(new Tile('_',0)); // Add blank
+            else rack.add(new Tile(word.charAt(i),tilePoints[word.charAt(i) - ABC_MIN]));
         }
         return rack;
     }
@@ -104,7 +106,7 @@ public class Board {
                 if (tile == null) {
                     System.out.print(".");
                 } else {
-                    System.out.print(tile.printLetter());
+                    System.out.print(tile.getLetter());
                 }
                 System.out.print("  ");
             }
@@ -185,6 +187,7 @@ public class Board {
             }
         }
         boardSpace = transposedBoard;
+        isTransposed = !isTransposed;
     }
 
     public void findAnchors() {
@@ -243,6 +246,23 @@ public class Board {
         return boardSpace[i][j].isAnchor();
     }
 
+    public boolean isRightEmpty(Square square) {
+        if (getRightSquare(square) == null) return false;
+        else return getRightSquare(square).isEmpty();
+    }
+
+    public boolean isRightNull(Square square) {
+        if (getRightSquare(square) == null) return true;
+        else return false;
+    }
+
+    public boolean isTransposed() {
+        return isTransposed;
+    }
+
     public int getBONUS() { return BONUS; }
 
+    public void setBoardTile(int row, int col, Tile tile) {
+        boardSpace[row][col].setTile(tile);
+    }
 }

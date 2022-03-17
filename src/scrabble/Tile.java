@@ -8,13 +8,15 @@ public class Tile {
     public Tile(char letter, int points) {
         this.letter = letter;
         this.points = points;
-        if (letter == '_') blank = true;
+        if (letter < 97) blank = true;
     }
 
-    public char getLetter() { return letter; }
+    public char getLetter() {
+        return letter;
+    }
 
-    public char printLetter() {
-        if (blank && letter != '_') return (char)((int) letter - 32);
+    public char getLowercaseLetter() {
+        if (blank && letter != '_') return (char)((int) letter + 32);
         else return letter;
     }
 

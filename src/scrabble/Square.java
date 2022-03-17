@@ -29,7 +29,12 @@ public class Square {
         return tile.getLetter();
     }
 
+    public char getLowercaseLetter() {
+        return tile.getLowercaseLetter();
+    }
+
     public int getPoints() {
+        if (!isWordMultiplier) return tile.getPoints()*multiplyLetter();
         return tile.getPoints();
     }
 
@@ -63,6 +68,10 @@ public class Square {
         int temp = row;
         row = col;
         col = temp;
+    }
+
+    public void clearMultipliers() {
+        multiplier = 1;
     }
 
     public void setAnchor(boolean anchor) { isAnchor = anchor; }

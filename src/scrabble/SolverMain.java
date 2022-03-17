@@ -26,16 +26,14 @@ public class SolverMain {
         Solver solver = new Solver(rack, board, trie);
 
         for (Tile tile : rack) {
-            System.out.print(tile.printLetter()+" ");
+            System.out.print(tile.getLowercaseLetter()+" ");
         }
         System.out.println();
         board.findAnchors();
-        board.transposeBoard();
-        board.printSimpleBoard();
-        board.transposeBoard();
-//        solver.findWord("",trie.getRoot(),rack,0);
         solver.solve();
 
+        solver.sortRack();
+        solver.printRack(rack);
 
     }
 }
