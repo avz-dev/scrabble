@@ -14,7 +14,6 @@ public class Solver {
     boolean wasBestWordBoardTransposed;
 
     // TODO: Boy is this solver WACK
-    // TODO: when word is played, square multiplier set to zero
 
     public Solver(LinkedList<Tile> rack, Board board, Trie trie) {
         this.rack = rack;
@@ -27,17 +26,12 @@ public class Solver {
         bestWord = "";
         maxRow = maxCol = 0;
 
-        board.printSimpleBoard();
-
+        board.findAnchors();
         solveHelper();
         board.transposeBoard();
         solveHelper();
         board.transposeBoard();
-
-        printBestWord();
         playWord();
-
-        board.printSimpleBoard();
     }
 
     public void solveHelper() {
@@ -61,25 +55,25 @@ public class Solver {
             word = square.getLetter() + word;
         }
         node = trie.findNode(word);
-        findWord(word, node, tiles, score, initSquare, WORD_MULTIPLIER, 0);
+        findWord(word, node, tiles, score, initSquare, WORD_MULTIPLIER, 0,false);
 
     }
 
     public void findWord(String word, TrieNode node, LinkedList<Tile>
-                        tiles, int score, Square square, int wordMultiplier, int crossScore) {
+                        tiles, int score, Square square, int wordMultiplier, int crossScore, boolean connects) {
         while (!square.isEmpty() && node != null) {
             word += square.getLetter();
             node = node.getNode(square.getLetter());
             score += square.getPoints();
             if (!board.isRightNull(square)) square = board.getRightSquare(square);
-            else if (node != null) {
-                testWord(node, score*wordMultiplier,tiles,word,square, crossScore);
-                square = null;
-                break;
-            }
+            else break;
         }
-        // TODO: crosschecks bypassed if word ends on anchor
-        if (node != null && square != null) {
+
+        if (connects && node != null && (tiles.isEmpty() || node.isTerminal())) {
+            testWord(node, score*wordMultiplier,tiles,word,board.getLeftSquare(square), crossScore);
+        }
+
+        if (node != null && square != null && square.isEmpty()) {
             for (Character letter : node.childNodes.keySet()) {
                 for (Tile tile : tiles) {
                     if (tile.isBlank()) tile.setLetter((char) ((int) letter - 32));
@@ -88,22 +82,23 @@ public class Solver {
                     int crossCheckScore = 0;
                     if (square.isAnchor()) {
                         crossCheckScore = crossCheck(square);
+                        if (crossCheckScore != -1) connects = true;
                     }
                     if (crossCheckScore != -1) {
-                        if (node.getNode(letter).isTerminal() &&
+                        if (node.getNode(letter).isTerminal() && connects &&
                             (board.isRightEmpty(square) || board.isRightNull(square))) {
                             testWord(node.getNode(letter), (score+ square.getPoints())*wordMultiplier,
                                     removeFromRack(tiles,tile), word+tile.getLowercaseLetter(),
                                     square, crossScore+crossCheckScore);
                         }
-                        if (board.isRightEmpty(square)) {
+                        if (!board.isRightNull(square)) {
                             findWord(word + letter,
                                     node.getNode(letter),
                                     removeFromRack(tiles, tile),
                                     (score + square.getPoints()),
                                     board.getRightSquare(square),
                                     wordMultiplier * square.multiplyWords(),
-                                    crossScore+crossCheckScore);
+                                    crossScore+crossCheckScore, connects);
                         }
                     }
                     square.setTile(null);
@@ -125,7 +120,6 @@ public class Solver {
             maxRow = square.getRow();
             maxCol = square.getCol();
             wasBestWordBoardTransposed = board.isTransposed();
-            System.out.println(bestWord+" ("+maxRow+","+maxCol+")");
         }
     }
 
@@ -190,15 +184,23 @@ public class Solver {
         Square square;
         sortRack();
         int letter = 0;
+        String word = "";
         maxCol = maxCol-bestWord.length()+1;
         if (wasBestWordBoardTransposed) {
             board.transposeBoard();
         }
         for (int i = maxCol; i < maxCol+bestWord.length(); i++) {
             square = board.getBoardSpace(maxRow, i);
+            while (!square.isEmpty()) {
+                word += square.getLetter();
+                square = board.getRightSquare(square);
+                letter++;
+                i++;
+            }
             for (Tile tile : rack) {
                 if (tile.getLetter() == '_') tile.setLetter((char)((int)bestWord.charAt(letter)-32));
                 if (tile.getLowercaseLetter() == bestWord.charAt(letter)) {
+                    word += tile.getLetter();
                     square.setTile(tile);
                     square.clearMultipliers();
                     rack.remove(tile);
@@ -210,6 +212,7 @@ public class Solver {
         if (wasBestWordBoardTransposed) {
             board.transposeBoard();
         }
+        bestWord = word;
     }
 
     // Sorts rack so blank tiles are always at the end

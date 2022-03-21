@@ -2,12 +2,12 @@ package scrabble;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 public class Board {
     private Square[][] boardSpace;
     Stack<Tile> tileBag = new Stack<>();
-    // Can be overridden to be modular
     int[] tileFrequency = {9, 2, 2, 4, 12, 2, 3, 2, 9, 1, 1, 4, 2, 6, 8, 2, 1, 6, 4, 6, 4, 2, 2, 1, 2, 1, 2};
     int[] tilePoints = {1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4, 10, 0};
     private final int RACK_SIZE = 7;
@@ -51,6 +51,37 @@ public class Board {
         else return null;
     }
 
+    public void readSolverBoard(String[][] boardArray, int boardSize) {
+        this.boardSize = boardSize;
+        center = boardSize/2;
+        int letter, index;
+        boardSpace = new Square[boardSize][boardSize];
+        for (int i = 0; i < boardSize; i++) {
+            for (int j = 0; j < boardSize; j++) {
+                String square = boardArray[i][j];
+                if (square.length() == 1) {
+                    isEmpty = false;
+                    letter = square.charAt(0);
+                    index = letter - ABC_MIN;
+                    if (letter < ABC_MIN) {
+                        boardSpace[i][j] = new Square(1, new Tile((char)letter, 0), false, i, j);
+                    } else {
+                        boardSpace[i][j] = new Square(1, new Tile((char)letter, tilePoints[index]), false, i, j);
+                    }
+                } else if (square.charAt(0) == '.') {
+                    if (square.charAt(1) == '.') {
+                        boardSpace[i][j] = new Square(1, null, false, i, j);
+                    } else {
+                        boardSpace[i][j] = new Square(square.charAt(1) - 48, null, false, i, j);
+                    }
+                } else {
+                    boardSpace[i][j] = new Square(square.charAt(0) - 48, null, true, i, j);
+                }
+            }
+        }
+    }
+
+
     public LinkedList<Tile> readRack(String word) {
         LinkedList<Tile> rack = new LinkedList<>();
         for (int i = 0; i < getRACK_SIZE(); i++) {
@@ -81,11 +112,35 @@ public class Board {
                         System.out.print("." + square.getMultiplier());
                     }
                 } else {
-                    System.out.print(tile.getLetter());
+                    System.out.print(" "+tile.getLetter());
                 }
                 System.out.print(" ");
             }
             System.out.println();
+        }
+    }
+
+    public void writeBoard(PrintWriter writer) {
+        Tile tile;
+        Square square;
+        for (int i = 0; i < boardSize; i++) {
+            for (int j = 0; j < boardSize; j++) {
+                square = boardSpace[i][j];
+                tile = square.getTile();
+                if (tile == null) {
+                    if (square.getMultiplier() == 1) {
+                        writer.print("..");
+                    } else if (square.isWordMultiplier()) {
+                        writer.print(square.getMultiplier() + ".");
+                    } else {
+                        writer.print("." + square.getMultiplier());
+                    }
+                } else {
+                    writer.print(" "+tile.getLetter());
+                }
+                if (j < boardSize-1) writer.print(" ");
+            }
+            writer.println();
         }
     }
 
