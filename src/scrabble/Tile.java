@@ -3,7 +3,7 @@ package scrabble;
 public class Tile {
     private char letter;
     private int points;
-    boolean blank;
+    private boolean blank;
 
     public Tile(char letter, int points) {
         this.letter = letter;
@@ -11,9 +11,7 @@ public class Tile {
         if (letter < 97) blank = true;
     }
 
-    public char getLetter() {
-        return letter;
-    }
+    public char getLetter() { return letter; }
 
     public char getLowercaseLetter() {
         if (blank && letter != '_') return (char)((int) letter + 32);
@@ -25,9 +23,7 @@ public class Tile {
     public boolean isBlank() { return blank; }
 
     @Override
-    public String toString() {
-        return ""+letter;
-    }
+    public String toString() { return ""+letter; }
 
     public void setLetter(char letter) { this.letter = letter; }
 }

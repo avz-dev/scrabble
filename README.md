@@ -23,7 +23,7 @@ Classes
   - Keep track of overall score and current word score
   - Automatically refill used tiles in rack
 
-- Computer/Solver
+- Solver
   - LeftPart(), ExtendRight(), LegalMove()
   - Recursive backtracking
   - Magic
@@ -33,12 +33,24 @@ Classes
   - End game state
 
 
-TO DO
+TO DO:
 
 - Player class
-- 'play' words with tiles and verify
-- add bland tile functionality
+  - Rework some methods (cross-checks)
+  - Allow player to try entire word before shutting them down
 
+- Game
+  - Link player and solver, alternating turns
+  - Add end game state
+  - Make GUI
 
-Future changes
-- dictionary file path
+- GUI
+  - Add play area: gridpane, text boxes, buttons, colored squares
+  - Buttons: squares, tiles, down/across, reset, shuffle tiles
+  - Text: Scores, tiles in bag, tile letters, square multipliers (DW, DL, TL, TW, *)
+  - Scenes: main game, win screen
+  - Ideas: different tile colors for different players? 
+           win screen displays played words & points for each player?
+
+-Future changes
+  - Apply following run command: java -jar scrabble.jar sowpods.txt < input.txt > output.txt

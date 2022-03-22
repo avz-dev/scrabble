@@ -210,7 +210,7 @@ public class Player {
 
     public void fillRack() {
         for (int i = rack.size(); i < board.getRACK_SIZE(); i++) {
-            rack.add(board.tileBag.pop());
+            rack.add(board.drawTile()); // TODO: make sure line doesn't affect code
         }
     }
 

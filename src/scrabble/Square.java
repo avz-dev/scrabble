@@ -16,18 +16,11 @@ public class Square {
         this.col = col;
     }
 
-    public boolean isEmpty() {
-        if (tile == null) return true;
-        else return false;
-    }
+    public boolean isEmpty() { return tile == null; }
 
-    public Tile getTile() {
-        return tile;
-    }
+    public Tile getTile() { return tile; }
 
-    public char getLetter() {
-        return tile.getLetter();
-    }
+    public char getLetter() { return tile.getLetter(); }
 
     public char getLowercaseLetter() {
         return tile.getLowercaseLetter();
@@ -42,11 +35,13 @@ public class Square {
         this.tile = tile;
     }
 
+    // applies multiplier if square is a word multiplier, otherwise return identity
     public int multiplyWords() {
         if (isWordMultiplier) return multiplier;
         else return 1;
     }
 
+    // returns identity if square is word multiplier, otherwise returns multiplier
     public int multiplyLetter() {
         if (isWordMultiplier) return 1;
         else return multiplier;
