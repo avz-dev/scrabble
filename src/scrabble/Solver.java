@@ -5,12 +5,18 @@ import java.util.Comparator;
 import java.util.LinkedList;
 
 public class Solver {
-    private LinkedList<Tile> rack;
+    private LinkedList<Tile> rack = new LinkedList<>();
     private Board board;
     private Trie trie;
     private int bestScore, bestRow, bestCol;
     private String bestWord;
     private boolean wasTransposed;
+
+    public Solver(Board board, Trie trie) {
+        this.board = board;
+        this.trie = trie;
+        fillRack();
+    }
 
     public Solver(LinkedList<Tile> rack, Board board, Trie trie) {
         this.rack = rack;
@@ -30,6 +36,7 @@ public class Solver {
         goSolve();
         board.transposeBoard();
         playWord();
+        fillRack();
     }
 
     // Scans board for squares with possible word plays, looks for words on valid squares
@@ -48,9 +55,7 @@ public class Solver {
     // Checks for existing "left parts" before attempting to build words
     private void startSolve(String word, LinkedList<Tile> tiles, Square square) {
         Square temp = square;
-        int score, initialScore, wordMultiplier;
-        score = initialScore = 0;
-        wordMultiplier = 1;
+        int score = 0;
         TrieNode node;
         while (board.getLeftSquare(temp) != null && !board.getLeftSquare(temp).isEmpty()) {
             temp = board.getLeftSquare(temp);
@@ -58,7 +63,7 @@ public class Solver {
             word = temp.getLetter() + word;
         }
         node = trie.findNode(word);
-        recursiveSolve(word, node, tiles, score, square, wordMultiplier, initialScore,false);
+        recursiveSolve(word, node, tiles, score, square, 1, 0,false);
     }
 
     // Tries all possible letter combinations seeking the highest-scoring word (recursive backtracking)
@@ -71,6 +76,10 @@ public class Solver {
             score += square.getPoints();
             if (!board.isRightNull(square)) square = board.getRightSquare(square);
             else break;
+        }
+
+        if (square == board.getBoardSpace(2,2) && word.equals("")) {
+            System.out.println();
         }
 
         // If a word connects to the board and is valid, then the word is tested against current best word
@@ -124,7 +133,7 @@ public class Solver {
         if (tiles.isEmpty()) {
             score += board.getBONUS();
         }
-        if (node.isTerminal() && bestScore < score) {
+        if (node.isTerminal() && bestScore <= score) {
             bestScore = score;
             bestWord = word;
             bestRow = square.getRow();
@@ -136,6 +145,7 @@ public class Solver {
     // checks for intersecting words and verifies them
     private int crossCheck(Square square) {
         int score = 0;
+        int wordMultiplier = square.multiplyWords();
         boolean crossesVertically = false;
         String crossWord = "";
 
@@ -159,7 +169,7 @@ public class Solver {
         if (!crossesVertically) return 0;
         // if the word is in the trie, then return the score. Otherwise, return the error indicator
         if (trie.traverseTrie(crossWord)) {
-            return score;
+            return score*wordMultiplier;
         } else {
             return -1;
         }
@@ -170,6 +180,12 @@ public class Solver {
         LinkedList<Tile> clone = (LinkedList<Tile>) temp.clone();
         clone.remove(tile);
         return clone;
+    }
+
+    public void fillRack() {
+        for (int i = rack.size(); i < board.getRACK_SIZE(); i++) {
+            rack.add(board.drawTile());
+        }
     }
 
 

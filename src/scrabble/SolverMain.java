@@ -2,12 +2,10 @@ package scrabble;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 public class SolverMain {
-// args for test: src/scrabble/twl06.txt src/scrabble/resources/test_solver.txt
     public static void main(String[] args) throws IOException {
         // Reads in dictionary scanner new file (args[0])
         Trie trie = new Trie();
@@ -19,10 +17,7 @@ public class SolverMain {
         }
 
         // Reads in board and tile rack from input file
-        File file = new File(args[1]);
-        Scanner reader = new Scanner(file);
-
-        PrintWriter writer = new PrintWriter(args[2], "UTF-8");
+        Scanner reader = new Scanner(System.in);
 
         // Loops through input file and solves each board and rack combo
         while (reader.hasNext()) {
@@ -42,20 +37,19 @@ public class SolverMain {
             rack = board.readRack(tileString);
 
             // Writes input board and tray to file
-            writer.println("Input Board:");
-            board.writeBoard(writer);
-            writer.println("Tray: "+tileString);
+            System.out.println("Input Board:");
+            board.printBoard();
+            System.out.println("Tray: "+tileString);
 
             // Creates solver and solves board/tray combo
             Solver solver = new Solver(rack, board, trie);
             solver.solve();
 
             // Writes solution to file
-            writer.println("Solution "+solver.getBestWord()+" has "+ solver.getBestScore()+" points");
-            writer.println("Solution Board:");
-            board.writeBoard(writer);
-            writer.println();
+            System.out.println("Solution "+solver.getBestWord()+" has "+ solver.getBestScore()+" points");
+            System.out.println("Solution Board:");
+            board.printBoard();
+            System.out.println();
         }
-        writer.close();
     }
 }

@@ -9,6 +9,7 @@ public class Main {
         Trie trie = new Trie();
         Board board = new Board();
 
+
         // Reads in dictionary scanner new file (args[0])
         File dictionary = new File(args[0]);
         Scanner scanner = new Scanner(dictionary);
@@ -16,19 +17,16 @@ public class Main {
             String word = scanner.next();
             trie.buildTrie(word);
         }
-
-        Player player = new Player(board, trie);
         board.createBoard();
+        Player player = new Player(board, trie);
+        Solver computer = new Solver(board,trie);
+
         // TODO: change while to check for win condition
-//        while (true) {
-//            board.printSimpleBoard();
-//            player.playTurn();
-//        }
-        board.printSimpleBoard();
-        player.playTurn();
-        board.transposeBoard();
-        board.printSimpleBoard();
-        board.transposeBoard();
-        board.printSimpleBoard();
+        while (true) {
+            board.printSimpleBoard();
+            player.playTurn();
+            board.printSimpleBoard();
+            computer.solve();
+        }
     }
 }

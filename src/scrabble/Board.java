@@ -99,7 +99,7 @@ public class Board {
 
     // Creates standard scrabble board
     public void createBoard() throws IOException {
-        readBoard(new File("src/scrabble/standard-board.txt"));
+        readBoard(new File("src/scrabble/resources/standard-board.txt"));
     }
 
     //TODO: Delete, for testing only
@@ -121,34 +121,9 @@ public class Board {
                 } else {
                     System.out.print(" "+tile.getLetter());
                 }
-                System.out.print(" ");
+                if (j < boardSize-1) System.out.print(" ");
             }
             System.out.println();
-        }
-    }
-
-    // Writes board to file
-    public void writeBoard(PrintWriter writer) {
-        Tile tile;
-        Square square;
-        for (int i = 0; i < boardSize; i++) {
-            for (int j = 0; j < boardSize; j++) {
-                square = boardSpace[i][j];
-                tile = square.getTile();
-                if (tile == null) {
-                    if (square.getMultiplier() == 1) {
-                        writer.print("..");
-                    } else if (square.isWordMultiplier()) {
-                        writer.print(square.getMultiplier() + ".");
-                    } else {
-                        writer.print("." + square.getMultiplier());
-                    }
-                } else {
-                    writer.print(" "+tile.getLetter());
-                }
-                if (j < boardSize-1) writer.print(" ");
-            }
-            writer.println();
         }
     }
 
@@ -171,6 +146,32 @@ public class Board {
                     System.out.print(".");
                 } else {
                     System.out.print(tile.getLetter());
+                }
+                System.out.print("  ");
+            }
+            System.out.println();
+        }
+    }
+
+    //TODO: Delete method, for testing only
+    public void printAnchorBoard() {
+        Square square;
+        System.out.print(" ");
+        for (int i = 0; i < boardSize; i++) {
+            System.out.print("  "+i);
+        }
+        System.out.println();
+        for (int i = 0; i < boardSize; i++) {
+            System.out.print(i+" ");
+            if (i < 10) System.out.print(" ");
+            for (int j = 0; j < boardSize; j++) {
+                square = boardSpace[i][j];
+                if (square.isAnchor()) {
+                    System.out.print("⚓");
+                } else if (square.isEmpty()){
+                    System.out.print(".");
+                } else {
+                    System.out.print(square.getLetter());
                 }
                 System.out.print("  ");
             }
@@ -218,6 +219,10 @@ public class Board {
     // scans board and marks anchor squares
     public void findAnchors() {
         Square square;
+        if (isEmpty()) {
+            boardSpace[center][center].setAnchor(true);
+            return;
+        }
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
                 square = boardSpace[i][j];
@@ -278,6 +283,8 @@ public class Board {
     public Square getBoardSpace(int i, int j) { return boardSpace[i][j]; }
 
     public boolean isEmpty() { return isEmpty; }
+
+    public void setIsEmpty(boolean isEmpty) { this.isEmpty = isEmpty; }
 
     public int getCenter() { return center; }
 }
