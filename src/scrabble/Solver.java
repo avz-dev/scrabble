@@ -192,7 +192,7 @@ public class Solver {
     // fills tile tray
     public void fillTray() {
         int fillSize = board.getTRAY_SIZE();
-        if (fillSize > board.getBagSize()) fillSize = board.getBagSize();
+        if (fillSize > board.getBagSize()) fillSize = board.getBagSize()+ tray.size();
         for (int i = tray.size(); i < fillSize; i++) {
             tray.add(board.drawTile());
         }

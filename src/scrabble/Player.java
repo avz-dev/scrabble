@@ -143,7 +143,9 @@ public class Player {
     public void shuffleTray() { Collections.shuffle(tray); }
 
     public void fillTray() {
-        for (int i = tray.size(); i < board.getTRAY_SIZE(); i++) {
+        int fillSize = board.getTRAY_SIZE();
+        if (fillSize > board.getBagSize()) fillSize = board.getBagSize()+tray.size();
+        for (int i = tray.size(); i < fillSize; i++) {
             tray.add(board.drawTile());
         }
     }
