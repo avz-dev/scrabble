@@ -1,3 +1,7 @@
+/*  Andrew Valdez
+    Solver plays word with the highest possible score
+    using recursive backtracking. */
+
 package scrabble;
 
 import java.util.Collections;
@@ -5,21 +9,22 @@ import java.util.Comparator;
 import java.util.LinkedList;
 
 public class Solver {
-    private LinkedList<Tile> rack = new LinkedList<>();
+    private LinkedList<Tile> tray = new LinkedList<>();
     private Board board;
     private Trie trie;
     private int bestScore, bestRow, bestCol, score;
     private String bestWord;
     private boolean wasTransposed;
+    private boolean noMoves = false;
 
     public Solver(Board board, Trie trie) {
         this.board = board;
         this.trie = trie;
-        fillRack();
+        fillTray();
     }
 
-    public Solver(LinkedList<Tile> rack, Board board, Trie trie) {
-        this.rack = rack;
+    public Solver(LinkedList<Tile> tray, Board board, Trie trie) {
+        this.tray = tray;
         this.board = board;
         this.trie = trie;
     }
@@ -35,8 +40,13 @@ public class Solver {
         board.transposeBoard();
         goSolve();
         board.transposeBoard();
-        playWord();
-        fillRack();
+        if (bestWord.equals("")) {
+            noMoves = true;
+        } else {
+            noMoves = false;
+            playWord();
+            fillTray();
+        }
     }
 
     // Scans board for squares with possible word plays, looks for words on valid squares
@@ -45,7 +55,7 @@ public class Solver {
             for (int j = 0; j < board.getBoardSize(); j++) {
                 if (board.isSquareEmpty(i,j)) {
                     if (inProximity(i,j)) {
-                        startSolve("", rack, board.getBoardSpace(i,j));
+                        startSolve("", tray, board.getBoardSpace(i,j));
                     }
                 }
             }
@@ -102,14 +112,14 @@ public class Solver {
                         if (node.getNode(letter).isTerminal() && connects &&
                             (board.isRightEmpty(square) || board.isRightNull(square))) {
                             testWord(node.getNode(letter), (score+ square.getPoints())*wordMultiplier,
-                                    removeFromRack(tiles,tile), word+tile.getLowercaseLetter(),
+                                    removeFromTray(tiles,tile), word+tile.getLowercaseLetter(),
                                     square, crossScore+crossCheckScore);
                         }
                         // if there's more space on the board, then keep on going
                         if (!board.isRightNull(square)) {
                             recursiveSolve(word + letter,
                                     node.getNode(letter),
-                                    removeFromRack(tiles, tile),
+                                    removeFromTray(tiles, tile),
                                     (score + square.getPoints()),
                                     board.getRightSquare(square),
                                     wordMultiplier * square.multiplyWords(),
@@ -123,6 +133,7 @@ public class Solver {
         }
     }
 
+    // compares current word with champion best word
     private void testWord(TrieNode node, int score, LinkedList<Tile> tiles, String word, Square square,
                          int crossScore) {
         score += crossScore;
@@ -171,55 +182,58 @@ public class Solver {
         }
     }
 
-    // makes a copy of the rack, removes a given tile, and returns the copy
-    private LinkedList<Tile> removeFromRack(LinkedList<Tile> temp, Tile tile) {
+    // makes a copy of the tray, removes a given tile, and returns the copy
+    private LinkedList<Tile> removeFromTray(LinkedList<Tile> temp, Tile tile) {
         LinkedList<Tile> clone = (LinkedList<Tile>) temp.clone();
         clone.remove(tile);
         return clone;
     }
 
-    public void fillRack() {
-        for (int i = rack.size(); i < board.getRACK_SIZE(); i++) {
-            rack.add(board.drawTile());
+    // fills tile tray
+    public void fillTray() {
+        int fillSize = board.getTRAY_SIZE();
+        if (fillSize > board.getBagSize()) fillSize = board.getBagSize();
+        for (int i = tray.size(); i < fillSize; i++) {
+            tray.add(board.drawTile());
         }
     }
 
     // Determines whether it's possible for a word to connect to a played tile
     private boolean inProximity(int row, int col) {
-        for (col = col; col <= board.getRACK_SIZE() + col; col++) {
+        for (col = col; col <= board.getTRAY_SIZE() + col; col++) {
             if (col >= board.getBoardSize()) break;
             if (board.isSquareAnchor(row, col)) return true;
         }
         return false;
     }
 
-    // Plays the determined best word, removing tiles from the rack and clearing square multipliers
+    // Plays the determined best word, removing tiles from the tray and clearing square multipliers
     private void playWord() {
         Square square;
-        sortRack();
+        sortTray();
         int letter = 0;
         String word = "";
-        bestCol = bestCol -bestWord.length()+1;
+        bestCol = bestCol - bestWord.length() + 1;
         score += bestScore;
-
+        board.setIsEmpty(false);
         // if the board was transposed when the best word was found, the board is transposed
         if (wasTransposed) board.transposeBoard();
 
-        for (int i = bestCol; i < bestCol +bestWord.length(); i++) {
+        for (int i = bestCol; i < bestCol+bestWord.length(); i++) {
             square = board.getBoardSpace(bestRow, i);
-            while (!square.isEmpty()) {
+            while (square != null && !square.isEmpty()) {
                 word += square.getLetter();
                 square = board.getRightSquare(square);
                 letter++;
                 i++;
             }
-            for (Tile tile : rack) {
+            for (Tile tile : tray) {
                 if (tile.getLetter() == '_') tile.setLetter((char)((int)bestWord.charAt(letter)-32));
-                if (tile.getLowercaseLetter() == bestWord.charAt(letter)) {
+                if (!(letter+1 > bestWord.length()) && tile.getLowercaseLetter() == bestWord.charAt(letter)) {
                     word += tile.getLetter();
                     square.setTile(tile);
                     square.clearMultipliers();
-                    rack.remove(tile);
+                    tray.remove(tile);
                     letter++;
                     break;
                 }
@@ -229,9 +243,9 @@ public class Solver {
         bestWord = word;
     }
 
-    // Sorts rack so blank tiles are always at the end
-    public void sortRack() {
-        Collections.sort(rack, new Comparator<Tile>() {
+    // Sorts tray so blank tiles are always at the end
+    public void sortTray() {
+        Collections.sort(tray, new Comparator<Tile>() {
             @Override
             public int compare(Tile o1, Tile o2) {
                 return o2.getLetter() - o1.getLetter();
@@ -246,4 +260,6 @@ public class Solver {
     public String getBestWord() { return bestWord; }
 
     public int getScore() { return score; }
+
+    public boolean hasNoMoves() { return noMoves; }
 }

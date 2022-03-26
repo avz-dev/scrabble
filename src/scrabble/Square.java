@@ -1,3 +1,5 @@
+/*  Andrew Valdez
+    Square holds board space data such as multipliers, anchor status, and tile. */
 package scrabble;
 
 public class Square {

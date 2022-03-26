@@ -1,3 +1,6 @@
+/*  Andrew Valdez
+    Handles all GUI elements and feeds player input into Player.
+    Calls on solver to play its turn. */
 package scrabble;
 
 import javafx.event.ActionEvent;
@@ -8,8 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Scanner;
 
 
@@ -24,21 +27,21 @@ public class Display {
     private int tileIndex;
     private Square square = null;
     private Word word;
-    private final String[] SUBSCRIPTS = {"₀","₁","₂","₃","₄","₅","","","₈","","₁₀"};
+    private final String[] SUBSCRIPTS = {"₀","₁","₂","₃","₄","₅","","","₈","","₁₀"}; // for point representation
 
-    @FXML
+    @FXML // text field to enter desired blank tile letter
     private TextField textField;
 
-    @FXML
+    @FXML // buttons with various functionality
     private Button acrossButton, downButton, shuffleButton, resetButton, playButton;
 
-    @FXML
+    @FXML // hold board and tray tiles/spaces
     private GridPane boardSpace, traySpace;
 
-    @FXML
+    @FXML // represent tiles in tray, scores, and instructions for user
     private Label tile0, tile1, tile2, tile3, tile4, tile5, tile6, instructions, playerScore, computerScore;
 
-    @FXML
+    @FXML // represent board spaces
     private Label square0, square1, square2, square3, square4, square5, square6, square7,
             square8, square9, square10, square11, square12, square13, square14, square15,
             square16, square17, square18, square19, square20, square21, square22, square23,
@@ -69,7 +72,7 @@ public class Display {
             square216, square217, square218, square219, square220, square221, square222, square223,
             square224;
 
-    @FXML
+    @FXML // initializes GUI elements, board/trie and computer/player objects, and starts game
     void initialize() throws IOException {
         Label[] tray = {tile0,tile1,tile2,tile3,tile4,tile5,tile6};
         Label[][] spaces = {{square0, square1, square2, square3, square4, square5, square6, square7,
@@ -104,7 +107,7 @@ public class Display {
                             square217, square218, square219, square220, square221, square222, square223, square224}};
         this.tray = tray;
         this.spaces = spaces;
-        buildTrie();
+        buildTrieAndBoard();
 
         Player player = new Player(BOARD, TRIE);
         Solver solver = new Solver(BOARD, TRIE);
@@ -114,9 +117,11 @@ public class Display {
         promptTurn();
     }
 
-    private void buildTrie() throws IOException {
+    // Reads in dictionary, creates trie structure, AND creates standard scrabble board
+    private void buildTrieAndBoard() throws IOException {
         // Reads in dictionary scanner new file (args[0])
-        File dictionary = new File("src/scrabble/resources/sowpods.txt");
+        InputStream dictionary = Display.class.getResourceAsStream("/sowpods.txt");
+//        File dictionary = new File("src/scrabble/resources/sowpods.txt");
         Scanner scanner = new Scanner(dictionary);
         while (scanner.hasNext()) {
             String word = scanner.next();
@@ -125,36 +130,23 @@ public class Display {
         BOARD.createBoard();
     }
 
-    private void updateTray() {
-        for (Label label : tray) {
-            label.setText("");
-            label.setStyle("");
-            label.setMouseTransparent(true);
-        }
-        for (int i = 0; i < player.getTraySize(); i++) {
-            tray[i].setText(player.getTrayTile(i)+" "+ SUBSCRIPTS[player.getTilePoints(i)]);
-            tray[i].setStyle("-fx-background-color:tan;");
-            tray[i].setMouseTransparent(false);
-        }
-    }
-
-    @FXML
-    private void selectDirection(MouseEvent event) {
-        Button button = (Button) event.getSource();
-        Word word;
-        if (button.getText().equals("Across")) {
-            direction = 'a';
-        } else direction = 'd';
+    // Starts player turn, locks off unnecessary buttons
+    private void promptTurn() {
+        instructions.setText("Select starting square or press play to end turn");
+        boardSpace.setMouseTransparent(false);
+        boardSpace.setVisible(true);
+        traySpace.setMouseTransparent(true);
         acrossButton.setVisible(false);
         downButton.setVisible(false);
-        traySpace.setMouseTransparent(false);
-        instructions.setText("Select a tile");
-        word = player.findPartialWord(square,0,"",direction);
-        this.word = word;
+        resetButton.setDisable(true);
+        playButton.setVisible(true);
+        textField.setVisible(false);
+        enableBoardSpaces();
+        updateAll();
+        BOARD.findAnchors();
     }
 
-
-    @FXML
+    @FXML // Allows selection of starting square
     private void selectSquare(MouseEvent event) {
         Label label = (Label) event.getSource();
         outerLoop:
@@ -169,10 +161,26 @@ public class Display {
         boardSpace.setMouseTransparent(true);
         acrossButton.setVisible(true);
         downButton.setVisible(true);
+        playButton.setVisible(false);
         instructions.setText("Select a direction");
     }
 
-    @FXML
+    @FXML // Allows selection of direction and sets variable accordingly
+    private void selectDirection(MouseEvent event) {
+        Button button = (Button) event.getSource();
+        Word word;
+        if (button.getText().equals("Across")) {
+            direction = 'a';
+        } else direction = 'd';
+        acrossButton.setVisible(false);
+        downButton.setVisible(false);
+        traySpace.setMouseTransparent(false);
+        instructions.setText("Select a tile");
+        word = player.findPartialWord(square,0,"",direction);
+        this.word = word;
+    }
+
+    @FXML // Allows selection of tile from tray
     private void selectTile(MouseEvent event) {
         Label label = (Label) event.getSource();
         if (word.getSquare() == null) {
@@ -182,7 +190,8 @@ public class Display {
         for (int i = 0; i < BOARD.getBoardSize(); i++) {
             if (label == tray[i]) {
                 tileIndex = i;
-                if (player.getTrayTile(i) == '_') {
+                if (player.getTrayTileLetter(i) == '_') {
+                    instructions.setText("Enter a letter");
                     textField.setVisible(true);
                     traySpace.setMouseTransparent(true);
                     shuffleButton.setMouseTransparent(true);
@@ -195,7 +204,7 @@ public class Display {
         resetButton.setDisable(false);
     }
 
-    @FXML
+    @FXML // Allows user to input desired letter in text field and sets blank
     private void setBlankLetter(ActionEvent event) {
         char letter = textField.getText().toUpperCase().charAt(0);
         if (letter > 64 && letter < 91) {
@@ -206,55 +215,16 @@ public class Display {
             textField.clear();
             traySpace.setMouseTransparent(false);
             shuffleButton.setMouseTransparent(false);
+            instructions.setText("Select a tile");
         }
     }
 
-    @FXML
-    private void resetTurn(MouseEvent event) {
-        player.undoTurn();
-        promptTurn();
-        tileIndex = 0;
-    }
-
-    private void enableBoardSpaces() {
-        for (int i = 0; i < BOARD.getBoardSize(); i++) {
-            for (int j = 0; j < BOARD.getBoardSize(); j++) {
-                spaces[i][j].setMouseTransparent(false);
-            }
-        }
-    }
-
-    private void promptTurn() {
-        instructions.setText("Select starting square");
-        boardSpace.setMouseTransparent(false);
-        boardSpace.setVisible(true);
-        traySpace.setMouseTransparent(true);
-        acrossButton.setVisible(false);
-        downButton.setVisible(false);
-        resetButton.setDisable(true);
-        playButton.setVisible(false);
-        textField.setVisible(false);
-        enableBoardSpaces();
-        updateAll();
-        BOARD.findAnchors();
-    }
-
-    private void updateAll() {
-        updateBoard();
-        updateTray();
-        playerScore.setText("Player: "+player.getScore());
-        computerScore.setText("Computer: "+solver.getScore());
-    }
-
-    @FXML
-    private void shuffle(MouseEvent event) {
-        player.shuffleRack();
-        updateTray();
-    }
-
-    @FXML
+    @FXML // Allows player to end turn or attempt to play a word
     private void playWord(MouseEvent event) {
-        int result = player.playWord(word);
+        int result;
+        if (word == null || word.isEmpty()) result = 4;
+        else result = player.playWord(word);
+
         switch (result) {
             case 1 -> instructions.setText("Word must connect to existing board tiles");
             case 2 -> instructions.setText("Invalid word");
@@ -263,12 +233,71 @@ public class Display {
                 solver.solve();
                 promptTurn();
             }
+            case 4 -> {
+                if (solver.hasNoMoves()) {
+                    endGame();
+                    return;
+                }
+                instructions.setText("Player ended turn");
+                solver.solve();
+                promptTurn();
+                if (solver.hasNoMoves()) {
+                    instructions.setText("Computer had no moves, your turn.");
+                }
+            }
         }
         updateAll();
     }
 
+    @FXML // Resets entire player turn
+    private void resetTurn(MouseEvent event) {
+        player.undoTurn();
+        promptTurn();
+        word.resetWord();
+        tileIndex = 0;
+    }
+
+    @FXML // Shuffles the tiles in the tray
+    private void shuffle(MouseEvent event) {
+        player.shuffleTray();
+        updateTray();
+    }
+
+    // Enables board spaces to be selected
+    private void enableBoardSpaces() {
+        for (int i = 0; i < BOARD.getBoardSize(); i++) {
+            for (int j = 0; j < BOARD.getBoardSize(); j++) {
+                spaces[i][j].setMouseTransparent(false);
+            }
+        }
+    }
+
+    // Updates visuals for the board, tray, & scores
+    private void updateAll() {
+        updateBoard();
+        updateTray();
+        playerScore.setText("Player: "+player.getScore());
+        computerScore.setText("Computer: "+solver.getScore());
+    }
+
+    // Updates appearance of tray
+    private void updateTray() {
+        for (Label label : tray) {
+            label.setText("");
+            label.setStyle("");
+            label.setMouseTransparent(true);
+        }
+        for (int i = 0; i < player.getTraySize(); i++) {
+            tray[i].setText(player.getTrayTileLetter(i)+" "+ SUBSCRIPTS[player.getTrayTilePoints(i)]);
+            tray[i].setStyle("-fx-background-color:tan;");
+            tray[i].setMouseTransparent(false);
+        }
+    }
+
+    // Update board visuals
     private void updateBoard() {
         Square square;
+        BOARD.findAnchors();
         if (BOARD.isTransposed()) BOARD.transposeBoard();
         for (int i = 0; i < BOARD.getBoardSize(); i++) {
             for (int j = 0; j < BOARD.getBoardSize(); j++) {
@@ -304,5 +333,17 @@ public class Display {
                 }
             }
         }
+    }
+
+    // ends the game, locks all buttons and declares winner
+    private void endGame() {
+        boardSpace.setMouseTransparent(true);
+        traySpace.setMouseTransparent(true);
+        playButton.setDisable(true);
+        shuffleButton.setDisable(true);
+        resetButton.setDisable(true);
+        if (solver.getScore() > player.getScore()) instructions.setText("Computer wins!");
+        else if (solver.getScore() == player.getScore()) instructions.setText("It's a draw!");
+        else instructions.setText("You win!");
     }
 }

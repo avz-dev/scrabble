@@ -1,3 +1,5 @@
+/*  Andrew Valdez
+    Main initializes and runs GUI. */
 package scrabble;
 
 import javafx.application.Application;
@@ -20,25 +22,3 @@ public class Main extends Application {
         launch(args);
     }
 }
-
-//    Trie trie = new Trie();
-//    Board board = new Board();
-//
-//    // Reads in dictionary scanner new file (args[0])
-//    File dictionary = new File(args[0]);
-//    Scanner scanner = new Scanner(dictionary);
-//        while (scanner.hasNext()) {
-//                String word = scanner.next();
-//                trie.buildTrie(word);
-//                }
-//                board.createBoard();
-//
-//                Player player = new Player(board, trie);
-//                Solver computer = new Solver(board,trie);
-//
-//                while (true) {
-//                board.printSimpleBoard();
-//                player.playTurn();
-//                board.printSimpleBoard();
-//                computer.solve();
-//                }

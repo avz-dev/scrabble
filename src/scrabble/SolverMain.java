@@ -1,3 +1,6 @@
+/*  Andrew Valdez
+    SolverMain reads in dictionary and input file, calls
+    Solver to find best word, and produces output file. */
 package scrabble;
 
 import java.io.File;
@@ -16,13 +19,13 @@ public class SolverMain {
             trie.buildTrie(word);
         }
 
-        // Reads in board and tile rack from input file
+        // Reads in board and tile tray from input file
         Scanner reader = new Scanner(System.in);
 
-        // Loops through input file and solves each board and rack combo
+        // Loops through input file and solves each board and tray combo
         while (reader.hasNext()) {
             Board board = new Board();
-            LinkedList<Tile> rack;
+            LinkedList<Tile> tray;
             int boardSize = reader.nextInt();
             String[][] boardArray = new String[boardSize][boardSize];
             for (int i = 0; i < boardSize; i++) {
@@ -32,9 +35,9 @@ public class SolverMain {
             }
             board.readSolverBoard(boardArray,boardSize);
 
-            // Reads in rack and creates a list of tile objects
+            // Reads in tray and creates a list of tile objects
             String tileString = reader.next();
-            rack = board.readRack(tileString);
+            tray = board.readTray(tileString);
 
             // Writes input board and tray to file
             System.out.println("Input Board:");
@@ -42,7 +45,7 @@ public class SolverMain {
             System.out.println("Tray: "+tileString);
 
             // Creates solver and solves board/tray combo
-            Solver solver = new Solver(rack, board, trie);
+            Solver solver = new Solver(tray, board, trie);
             solver.solve();
 
             // Writes solution to file

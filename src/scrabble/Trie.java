@@ -1,3 +1,5 @@
+/*  Andrew Valdez
+    Trie holds root node, builds trie, walks trie, and finds nodes in trie */
 package scrabble;
 
 public class Trie {
@@ -45,8 +47,8 @@ public class Trie {
         int i;
         if (word == null) return false;
         for (i = 0; i < word.length(); i++) {
-            current = current.getNode(word.charAt(i));
             if (current == null) break;
+            current = current.getNode(word.charAt(i));
         }
         return current != null && current.isTerminal();
     }

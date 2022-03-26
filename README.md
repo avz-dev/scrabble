@@ -1,56 +1,44 @@
 SCRABBLE
 
+How to Play
+- The player starts the game by either selecting a starting square or selecting "Play" to end their turn.
+- The player is also able to shuffle the tiles in their tray.
+- Once a tile is selected, the player must select a direction in which to build the word.
+- Once a direction is selected, the player may select tiles to add to the board or reset their turn.
+- If at least one tile has been placed, the player may select "Play" to submit the word. 
+- Invalid words will not be played and the player can either continue adding to the word or reset their turn.
+- If a word is successfully played, the computer then plays a word.
+- Each word is scored and each word score is added to the total score.
+- The participant with the highest score is declared the winner at the end of the game.
+- The game ends when the both solver and player have no valid plays. (Note: player must end their turn)
+
+
 Classes
 
 - Trie Data Structure:
-  - Read in lexicon and build trie (print in-order to test)
+  - Reads in dictionary and builds trie data structure
+
+- Display:
+  - Handles all GUI elements and feeds player input into Player. Alternates turns between players.
   
 - Board:
-  - Squares with:
-    - Cross-check "bit vector", change over time
-    - Score multipliers, null after first use
-    - Read from input and build 2D array of board squares
+  - Holds square objects with multiplier information, stores tiles placed on board.
   
-- Tiles
-  - Letter value
-  - Bit vector index?
-  - Point value
-  - Make however many of each, put in stack, shuffle and pop
+- Tiles:
+  - Holds tile data such as letter, points, and blank status.
 
-- Player
-  - Ability to play word
-  - Check valid word, return tiles to rack if invalid
-  - Keep track of overall score and current word score
-  - Automatically refill used tiles in rack
+- Square:
+  - Holds board space data such as multipliers, anchor status, and tile.
 
-- Solver
-  - LeftPart(), ExtendRight(), LegalMove()
-  - Recursive backtracking
-  - Magic
+- Player:
+  - Ability to play word, check word validity, return tiles to rack if invalid. 
+  - Keeps track of overall score and current word score.
 
-- Main Game
-  - Alternate turns between players
-  - End game state
+- Solver:
+  - Plays word with the highest possible score using recursive backtracking.
 
+- Main
+  - Initializes Display and starts game.
 
-TO DO:
-
-- Player class
-  - Rework some methods (cross-checks)
-  - Allow player to try entire word before shutting them down
-
-- Game
-  - Link player and solver, alternating turns
-  - Add end game state
-  - Make GUI
-
-- GUI
-  - Add play area: gridpane, text boxes, buttons, colored squares
-  - Buttons: squares, tiles, down/across, reset, shuffle tiles
-  - Text: Scores, tiles in bag, tile letters, square multipliers (DW, DL, TL, TW, *)
-  - Scenes: main game, win screen
-  - Ideas: different tile colors for different players? 
-           win screen displays played words & points for each player?
-
--Future changes
-  - Apply following run command: java -jar scrabble.jar sowpods.txt < input.txt > output.txt
+- MainSolver:
+  - Reads in dictionary and input file, calls Solver to find best word, and produces output file.

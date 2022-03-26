@@ -1,3 +1,5 @@
+/*  Andrew Valdez
+    Tile holds tile data such as letter, points, and blank status. */
 package scrabble;
 
 public class Tile {

@@ -1,15 +1,16 @@
+/*  Andrew Valdez
+    Player plays valid words, checks word validity, modifies tray, resets turn.
+    Word keeps track of overall score and current word score. */
 package scrabble;
 
 import java.util.Collections;
 import java.util.LinkedList;
-import java.util.Scanner;
 
 public class Player {
-    private LinkedList<Tile> rack = new LinkedList<>();
+    private LinkedList<Tile> tray = new LinkedList<>();
     private LinkedList<Tile> wordTiles = new LinkedList<>();
     private LinkedList<Square> wordSquares = new LinkedList<>();
     private Trie trie;
-    private Scanner scnr = new Scanner(System.in);
     private Board board;
     private int score = 0;
 
@@ -20,41 +21,10 @@ public class Player {
     public Player(Board board, Trie trie) {
         this.board = board;
         this.trie = trie;
-        fillRack();
+        fillTray();
     }
 
-    public void playTurn() {
-        String word = "";
-        char direction;
-        int row, col;
-        int score = 0;
-        Square square;
-
-        printRack();
-        board.findAnchors();
-
-        // Prompt user for starting square
-         do {
-            System.out.println("Select starting square:");
-            row = scnr.nextInt();
-            col = scnr.nextInt();
-        } while(!inProximity(row,col));
-
-        // Prompt user for word direction
-        System.out.println("Across or Down (a/d):");
-        do {
-            direction = scnr.next().charAt(0);
-        } while (direction != 'a' && direction != 'd');
-
-        square = board.getBoardSpace(row, col);
-
-        if (direction == 'd') board.transposeBoard();
-
-        findPartialWord(square,score,word,direction);
-
-        if (board.isTransposed()) board.transposeBoard();
-    }
-
+    // finds "left parts" of word before building onto it
     public Word findPartialWord(Square square, int score, String word, char direction) {
         Square initial = square;
         if (direction == 'd') board.transposeBoard();
@@ -67,85 +37,10 @@ public class Player {
         return new Word(initial,score,word);
     }
 
-    private void buildWord(String word, Square square, int score,int initialIndex) {
-        int tileIndex, crossScore, wordMultiplier;
-        crossScore = 0;
-        wordMultiplier = 1;
-        Tile tile;
-        boolean connects = false, legalWord = true;
-        char cont;
-        // main turn loop
-        do {
-            // Prompt user to select a tile
-            do {
-                printRack();
-                System.out.println("Select a tile:");
-                tileIndex = scnr.nextInt();
-            } while (tileIndex < 0 || tileIndex >= rack.size());
-
-            tile = rack.get(tileIndex);
-
-            // Prompt blank letter selection
-            if (tile.isBlank()) {
-                char letter;
-                System.out.println("Select a letter:");
-                do {
-                    letter = scnr.next().toLowerCase().charAt(0);
-                } while (letter < 97 || letter > 122);
-                tile.setLetter(letter);
-            }
-
-            square.setTile(tile);
-            word += tile.getLetter();
-            score += (tile.getPoints()*square.multiplyLetter());
-            wordSquares.add(square);
-            wordTiles.add(tile);
-            rack.remove(tile);
-            wordMultiplier *= square.multiplyWords();
-
-            if (square.isAnchor()) {
-                crossScore += crossCheck(square);
-                connects = true;
-                if (crossScore != -1) score += crossScore;
-                else legalWord = false;
-            }
-
-            square = board.getRightSquare(square);
-            if (square == null) break;
-
-            // Add existing board tiles to word
-            while (square != null && !square.isEmpty()) {
-                word += square.getLetter();
-                score += square.getPoints();
-                square = board.getRightSquare(square);
-                connects = true;
-            }
-
-            System.out.println("Word: "+word);
-
-            System.out.println("Continue? (y/n)");
-            cont = scnr.next().charAt(0);
-        } while (cont == 'y');
-
-        if ((word.length() + initialIndex) > board.getBoardSize()) {
-            System.out.println(word+" does not fit on board");
-            undoTurn();
-        } else if (!trie.traverseTrie(word) || !legalWord) {
-            System.out.println("Invalid word");
-            undoTurn();
-        } else if (!connects) {
-            System.out.println("Word must connect to tiles on board.");
-            undoTurn();
-        } else {
-            score*=wordMultiplier;
-            fillRack();
-            wordTiles.clear();
-            wordSquares.clear();
-            board.setIsEmpty(false);
-            System.out.println("total word score: "+score);
-        }
-    }
-
+    // attempts to play word and return int values according to success:
+    // 1: word is not anchored to existing tiles (or center tile for first turn)
+    // 2: word or cross word is invalid (also default)
+    // 3: the word is legal and played
     public int playWord(Word word) {
         boolean legalWord = trie.traverseTrie(word.getWord());
         if (!word.doesConnect()) {
@@ -154,7 +49,7 @@ public class Player {
             return 2;
         } else if (legalWord) {
             score += word.getScoreTotal();
-            fillRack();
+            fillTray();
             wordTiles.clear();
             wordSquares.clear();
             board.setIsEmpty(false);
@@ -164,8 +59,9 @@ public class Player {
         }
     }
 
+    // places a tile, updating word object with necessary data
     public Word playTile(Word word, int tileIndex, char direction) {
-        Tile tile = rack.get(tileIndex);
+        Tile tile = tray.get(tileIndex);
         Square square = word.getSquare();
 
         if (direction == 'd') board.transposeBoard();
@@ -174,7 +70,7 @@ public class Player {
         word.updateWord(tile.getLetter(),tile.getPoints()*square.multiplyLetter(),
                         board.getRightSquare(square), square.multiplyWords());
         wordTiles.add(tile);
-        rack.remove(tile);
+        tray.remove(tile);
 
         if (square.isAnchor()) {
             int crossScore = crossCheck(square);
@@ -230,24 +126,12 @@ public class Player {
         }
     }
 
-    public void setBlank(char letter, int index) {
-        if (rack.get(index).isBlank()) rack.get(index).setLetter(letter);
-    }
-
-    // Determines whether it's possible for a word to connect to a played tile
-    private boolean inProximity(int row, int col) {
-        for (int j = col; col <= board.getRACK_SIZE() + col; j++) {
-            if (j >= board.getBoardSize()) break;
-            if (board.isSquareAnchor(row, j)) return true;
-        }
-        return false;
-    }
-
+    // Return tiles to tray
     public void undoTurn() {
         for (Tile tile : wordTiles) {
             if (tile.isBlank()) tile.setLetter('_');
         }
-        rack.addAll(wordTiles);
+        tray.addAll(wordTiles);
         for (Square space : wordSquares) {
             space.setTile(null);
         }
@@ -255,46 +139,31 @@ public class Player {
         wordSquares.clear();
     }
 
-    public void undoMove() {
-        if (wordTiles.getLast().isBlank()) wordTiles.getLast().setLetter('_');
-        rack.add(wordTiles.getLast());
-        wordTiles.remove(wordTiles.getLast());
-        wordSquares.getLast().setTile(null);
-        wordSquares.remove(wordSquares.getLast());
-    }
+    // Shuffle tiles in the tray
+    public void shuffleTray() { Collections.shuffle(tray); }
 
-    public void fillRack() {
-        for (int i = rack.size(); i < board.getRACK_SIZE(); i++) {
-            rack.add(board.drawTile());
+    public void fillTray() {
+        for (int i = tray.size(); i < board.getTRAY_SIZE(); i++) {
+            tray.add(board.drawTile());
         }
     }
 
-    public int getTilePoints(int i)  { return rack.get(i).getPoints(); }
-
-    public char getTrayTile(int i) {
-        return rack.get(i).getLetter();
+    public void setBlank(char letter, int index) {
+        if (tray.get(index).isBlank()) tray.get(index).setLetter(letter);
     }
 
-    public int sumPoints(LinkedList<Tile> word) {
-        int pointSum = 0;
-        for (Tile tile : word) {
-            pointSum += tile.getPoints();
-        }
-        return pointSum;
+    public int getTrayTilePoints(int i)  { return tray.get(i).getPoints(); }
+
+    public char getTrayTileLetter(int i) {
+        return tray.get(i).getLetter();
     }
+
+    public int getTraySize() { return tray.size(); }
 
     public int getScore() { return score;}
-    public int getTraySize() { return rack.size(); }
-    public void shuffleRack() { Collections.shuffle(rack); }
-
-    public void printRack() {
-        for (Tile tile : rack) {
-            System.out.print(tile.getLetter()+"  ");
-        }
-        System.out.println();
-    }
 }
 
+// used for building word and collecting word data (scores, validity, etc)
 class Word {
     private Square square;
     private int score, crossScore;
@@ -352,4 +221,6 @@ class Word {
     public boolean doesConnect() { return connects; }
 
     public boolean isLegalWord() { return legalWord; }
+
+    public boolean isEmpty() { return word.equals(""); }
 }

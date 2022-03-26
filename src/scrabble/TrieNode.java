@@ -1,3 +1,5 @@
+/*  Andrew Valdez
+    TrieNode holds letter value, terminal status, and successive nodes. */
 package scrabble;
 
 import java.util.HashMap;
