@@ -8,7 +8,7 @@ public class Solver {
     private LinkedList<Tile> rack = new LinkedList<>();
     private Board board;
     private Trie trie;
-    private int bestScore, bestRow, bestCol;
+    private int bestScore, bestRow, bestCol, score;
     private String bestWord;
     private boolean wasTransposed;
 
@@ -78,10 +78,6 @@ public class Solver {
             else break;
         }
 
-        if (square == board.getBoardSpace(2,2) && word.equals("")) {
-            System.out.println();
-        }
-
         // If a word connects to the board and is valid, then the word is tested against current best word
         if (connects && node != null && (tiles.isEmpty() || node.isTerminal())) {
             testWord(node, score*wordMultiplier,tiles,word,board.getLeftSquare(square), crossScore);
@@ -133,7 +129,7 @@ public class Solver {
         if (tiles.isEmpty()) {
             score += board.getBONUS();
         }
-        if (node.isTerminal() && bestScore <= score) {
+        if (node.isTerminal() && bestScore < score) {
             bestScore = score;
             bestWord = word;
             bestRow = square.getRow();
@@ -188,7 +184,6 @@ public class Solver {
         }
     }
 
-
     // Determines whether it's possible for a word to connect to a played tile
     private boolean inProximity(int row, int col) {
         for (col = col; col <= board.getRACK_SIZE() + col; col++) {
@@ -205,6 +200,7 @@ public class Solver {
         int letter = 0;
         String word = "";
         bestCol = bestCol -bestWord.length()+1;
+        score += bestScore;
 
         // if the board was transposed when the best word was found, the board is transposed
         if (wasTransposed) board.transposeBoard();
@@ -248,4 +244,6 @@ public class Solver {
 
     // returns current best word
     public String getBestWord() { return bestWord; }
+
+    public int getScore() { return score; }
 }

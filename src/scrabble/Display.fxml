@@ -1,0 +1,1276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="845.0" prefWidth="760.0" style="-fx-background-color: #a34b3c#a34b3c;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scrabble.Display">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ebddc5" height="108.0" layoutX="26.0" layoutY="719.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" width="708.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ebddc5" height="35.0" layoutX="28.0" layoutY="721.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="704.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ebddc5" height="35.0" layoutX="280.0" layoutY="721.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="300.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fffdf8" height="35.0" layoutX="28.0" layoutY="721.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" width="400.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ebdcc5" height="708.0" layoutX="26.0" layoutY="16.0" stroke="#282727" strokeType="INSIDE" strokeWidth="4.0" width="708.0" />
+      <GridPane fx:id="boardSpace" gridLinesVisible="true" layoutX="30.0" layoutY="20.0" prefHeight="700.0" prefWidth="700.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label fx:id="square0" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square1" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="1">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square2" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="2">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square3" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="3">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square4" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="4">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square5" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="5">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square6" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="6">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square7" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="7">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square8" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="8">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square9" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="9">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square10" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="10">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square11" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="11">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square12" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="12">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square13" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="13">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square14" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="14">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square15" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.rowIndex="1">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square16" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square17" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square18" alignment="CENTER" contentDisplay="CENTER" layoutX="102.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square19" alignment="CENTER" contentDisplay="CENTER" layoutX="148.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square20" alignment="CENTER" contentDisplay="CENTER" layoutX="194.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square21" alignment="CENTER" contentDisplay="CENTER" layoutX="240.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="6" GridPane.rowIndex="1">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square22" alignment="CENTER" contentDisplay="CENTER" layoutX="287.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="7" GridPane.rowIndex="1">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square23" alignment="CENTER" contentDisplay="CENTER" layoutX="334.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="8" GridPane.rowIndex="1">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square24" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="9" GridPane.rowIndex="1">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square25" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="10" GridPane.rowIndex="1">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square26" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="11" GridPane.rowIndex="1">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square27" alignment="CENTER" contentDisplay="CENTER" layoutX="522.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="12" GridPane.rowIndex="1">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square28" alignment="CENTER" contentDisplay="CENTER" layoutX="569.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="13" GridPane.rowIndex="1">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square29" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="14" GridPane.rowIndex="1">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square30" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square31" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square32" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square33" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square34" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square35" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="5" GridPane.rowIndex="2">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square36" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="6" GridPane.rowIndex="2">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square37" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="7" GridPane.rowIndex="2">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square38" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="8" GridPane.rowIndex="2">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square39" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="9" GridPane.rowIndex="2">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square40" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="10" GridPane.rowIndex="2">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square41" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="11" GridPane.rowIndex="2">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square42" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="12" GridPane.rowIndex="2">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square43" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="13" GridPane.rowIndex="2">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square44" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="14" GridPane.rowIndex="2">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square45" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="0" GridPane.rowIndex="3">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square46" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square47" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="2" GridPane.rowIndex="3">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square48" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="3" GridPane.rowIndex="3">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square49" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="4" GridPane.rowIndex="3">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square50" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="5" GridPane.rowIndex="3">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square51" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="6" GridPane.rowIndex="3">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square52" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="7" GridPane.rowIndex="3">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square53" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="8" GridPane.rowIndex="3">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square54" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="9" GridPane.rowIndex="3">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square55" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="10" GridPane.rowIndex="3">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square56" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="11" GridPane.rowIndex="3">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square57" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="12" GridPane.rowIndex="3">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square58" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="13" GridPane.rowIndex="3">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square59" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="14" GridPane.rowIndex="3">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square60" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="0" GridPane.rowIndex="4">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square61" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square62" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="2" GridPane.rowIndex="4">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square63" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="3" GridPane.rowIndex="4">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square64" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="4" GridPane.rowIndex="4">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square65" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="5" GridPane.rowIndex="4">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square66" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="6" GridPane.rowIndex="4">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square67" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="7" GridPane.rowIndex="4">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square68" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="8" GridPane.rowIndex="4">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square69" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="9" GridPane.rowIndex="4">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square70" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="10" GridPane.rowIndex="4">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square71" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="11" GridPane.rowIndex="4">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square72" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="12" GridPane.rowIndex="4">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square73" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="13" GridPane.rowIndex="4">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square74" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="14" GridPane.rowIndex="4">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square75" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="0" GridPane.rowIndex="5">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square76" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square77" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="2" GridPane.rowIndex="5">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square78" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="3" GridPane.rowIndex="5">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square79" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="4" GridPane.rowIndex="5">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square80" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="5" GridPane.rowIndex="5">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square81" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="6" GridPane.rowIndex="5">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square82" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="7" GridPane.rowIndex="5">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square83" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="8" GridPane.rowIndex="5">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square84" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="9" GridPane.rowIndex="5">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square85" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="10" GridPane.rowIndex="5">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square86" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="11" GridPane.rowIndex="5">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square87" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="12" GridPane.rowIndex="5">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square88" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="13" GridPane.rowIndex="5">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square89" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="14" GridPane.rowIndex="5">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square90" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="0" GridPane.rowIndex="6">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square91" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="1" GridPane.rowIndex="6">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square92" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="2" GridPane.rowIndex="6">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square93" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="3" GridPane.rowIndex="6">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square94" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="4" GridPane.rowIndex="6">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square95" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="5" GridPane.rowIndex="6">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square96" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="6" GridPane.rowIndex="6">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square97" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="7" GridPane.rowIndex="6">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square98" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="8" GridPane.rowIndex="6">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square99" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="9" GridPane.rowIndex="6">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square100" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="10" GridPane.rowIndex="6">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square101" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="11" GridPane.rowIndex="6">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square102" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="12" GridPane.rowIndex="6">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square103" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="13" GridPane.rowIndex="6">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square104" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="14" GridPane.rowIndex="6">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square105" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="0" GridPane.rowIndex="7">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square106" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="1" GridPane.rowIndex="7">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square107" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="2" GridPane.rowIndex="7">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square108" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="3" GridPane.rowIndex="7">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square109" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="4" GridPane.rowIndex="7">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square110" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="5" GridPane.rowIndex="7">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square111" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="6" GridPane.rowIndex="7">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square112" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="7" GridPane.rowIndex="7">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square113" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="8" GridPane.rowIndex="7">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square114" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="9" GridPane.rowIndex="7">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square115" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="10" GridPane.rowIndex="7">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square116" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="11" GridPane.rowIndex="7">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square117" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="12" GridPane.rowIndex="7">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square118" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="13" GridPane.rowIndex="7">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square119" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="14" GridPane.rowIndex="7">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square120" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="0" GridPane.rowIndex="8">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square121" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="1" GridPane.rowIndex="8">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square122" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="2" GridPane.rowIndex="8">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square123" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="3" GridPane.rowIndex="8">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square124" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="4" GridPane.rowIndex="8">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square125" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="5" GridPane.rowIndex="8">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square126" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="6" GridPane.rowIndex="8">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square127" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="7" GridPane.rowIndex="8">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square128" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="8" GridPane.rowIndex="8">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square129" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="9" GridPane.rowIndex="8">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square130" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="10" GridPane.rowIndex="8">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square131" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="11" GridPane.rowIndex="8">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square132" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="12" GridPane.rowIndex="8">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square133" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="13" GridPane.rowIndex="8">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square134" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="14" GridPane.rowIndex="8">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square135" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="0" GridPane.rowIndex="9">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square136" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="1" GridPane.rowIndex="9">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square137" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="2" GridPane.rowIndex="9">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square138" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="3" GridPane.rowIndex="9">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square139" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="4" GridPane.rowIndex="9">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square140" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="5" GridPane.rowIndex="9">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square141" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="6" GridPane.rowIndex="9">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square142" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="7" GridPane.rowIndex="9">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square143" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="8" GridPane.rowIndex="9">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square144" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="9" GridPane.rowIndex="9">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square145" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="10" GridPane.rowIndex="9">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square146" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="11" GridPane.rowIndex="9">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square147" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="12" GridPane.rowIndex="9">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square148" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="13" GridPane.rowIndex="9">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square149" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="14" GridPane.rowIndex="9">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square150" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="0" GridPane.rowIndex="10">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square151" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="1" GridPane.rowIndex="10">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square152" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="2" GridPane.rowIndex="10">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square153" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="3" GridPane.rowIndex="10">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square154" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="4" GridPane.rowIndex="10">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square155" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="5" GridPane.rowIndex="10">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square156" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="6" GridPane.rowIndex="10">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square157" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="7" GridPane.rowIndex="10">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square158" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="8" GridPane.rowIndex="10">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square159" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="9" GridPane.rowIndex="10">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square160" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="10" GridPane.rowIndex="10">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square161" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="11" GridPane.rowIndex="10">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square162" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="12" GridPane.rowIndex="10">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square163" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="13" GridPane.rowIndex="10">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square164" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="14" GridPane.rowIndex="10">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square165" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="0" GridPane.rowIndex="11">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square166" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="1" GridPane.rowIndex="11">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square167" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="2" GridPane.rowIndex="11">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square168" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="3" GridPane.rowIndex="11">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square169" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="4" GridPane.rowIndex="11">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square170" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="5" GridPane.rowIndex="11">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square171" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="6" GridPane.rowIndex="11">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square172" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="7" GridPane.rowIndex="11">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square173" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="8" GridPane.rowIndex="11">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square174" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="9" GridPane.rowIndex="11">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square175" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="10" GridPane.rowIndex="11">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square176" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="11" GridPane.rowIndex="11">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square177" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="12" GridPane.rowIndex="11">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square178" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="13" GridPane.rowIndex="11">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square179" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="14" GridPane.rowIndex="11">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square180" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="0" GridPane.rowIndex="12">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square181" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="1" GridPane.rowIndex="12">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square182" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="2" GridPane.rowIndex="12">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square183" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="3" GridPane.rowIndex="12">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square184" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="4" GridPane.rowIndex="12">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square185" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="5" GridPane.rowIndex="12">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square186" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="6" GridPane.rowIndex="12">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square187" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="7" GridPane.rowIndex="12">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square188" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="8" GridPane.rowIndex="12">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square189" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="9" GridPane.rowIndex="12">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square190" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="10" GridPane.rowIndex="12">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square191" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="11" GridPane.rowIndex="12">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square192" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="12" GridPane.rowIndex="12">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square193" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="13" GridPane.rowIndex="12">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square194" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="14" GridPane.rowIndex="12">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square195" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="0" GridPane.rowIndex="13">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square196" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="1" GridPane.rowIndex="13">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square197" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="2" GridPane.rowIndex="13">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square198" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="3" GridPane.rowIndex="13">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square199" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="4" GridPane.rowIndex="13">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square200" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="5" GridPane.rowIndex="13">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square201" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="6" GridPane.rowIndex="13">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square202" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="7" GridPane.rowIndex="13">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square203" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="8" GridPane.rowIndex="13">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square204" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="9" GridPane.rowIndex="13">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square205" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="10" GridPane.rowIndex="13">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square206" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="11" GridPane.rowIndex="13">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square207" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="12" GridPane.rowIndex="13">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square208" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="13" GridPane.rowIndex="13">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square209" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="14" GridPane.rowIndex="13">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square210" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="0" GridPane.rowIndex="14">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square211" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="1" GridPane.rowIndex="14">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square212" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="2" GridPane.rowIndex="14">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square213" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="3" GridPane.rowIndex="14">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square214" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="4" GridPane.rowIndex="14">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square215" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="5" GridPane.rowIndex="14">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square216" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="6" GridPane.rowIndex="14">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square217" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="7" GridPane.rowIndex="14">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square218" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="8" GridPane.rowIndex="14">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square219" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="9" GridPane.rowIndex="14">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square220" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="10" GridPane.rowIndex="14">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square221" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="11" GridPane.rowIndex="14">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square222" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="12" GridPane.rowIndex="14">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square223" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.0" prefWidth="46.0" GridPane.columnIndex="13" GridPane.rowIndex="14">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="square224" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="58.0" onMouseClicked="#selectSquare" prefHeight="46.6" prefWidth="46.6" GridPane.columnIndex="14" GridPane.rowIndex="14">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </GridPane>
+      <GridPane fx:id="traySpace" gridLinesVisible="true" layoutX="205.0" layoutY="765.0" prefHeight="50.0" prefWidth="350.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label fx:id="tile0" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#selectTile" prefHeight="50.0" prefWidth="50.0">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="tile1" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#selectTile" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="1">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="tile2" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#selectTile" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="2">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="tile3" alignment="CENTER" contentDisplay="CENTER" layoutX="110.0" layoutY="10.0" onMouseClicked="#selectTile" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="3">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="tile4" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#selectTile" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="4">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="tile5" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#selectTile" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="5">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="tile6" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#selectTile" prefHeight="50.0" prefWidth="50.0" GridPane.columnIndex="6">
+               <font>
+                  <Font name="SansSerif Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </GridPane>
+      <Button fx:id="acrossButton" layoutX="40.0" layoutY="765.0" mnemonicParsing="false" onMouseClicked="#selectDirection" prefHeight="50.0" prefWidth="70.0" style="-fx-background-color: tan; -fx-border-color: black;" text="Across">
+         <font>
+            <Font name="SansSerif Bold" size="13.0" />
+         </font></Button>
+      <Button fx:id="downButton" layoutX="120.0" layoutY="765.0" mnemonicParsing="false" onMouseClicked="#selectDirection" prefHeight="50.0" prefWidth="70.0" style="-fx-background-color: tan; -fx-border-color: black;" text="Down">
+         <font>
+            <Font name="SansSerif Bold" size="13.0" />
+         </font></Button>
+      <Button fx:id="shuffleButton" layoutX="570.0" layoutY="765.0" mnemonicParsing="false" onMouseClicked="#shuffle" prefHeight="50.0" prefWidth="70.0" style="-fx-background-color: tan; -fx-border-color: black;" text="Shuffle">
+         <font>
+            <Font name="SansSerif Bold" size="13.0" />
+         </font></Button>
+      <Button fx:id="resetButton" layoutX="650.0" layoutY="765.0" mnemonicParsing="false" onMouseClicked="#resetTurn" prefHeight="50.0" prefWidth="70.0" style="-fx-background-color: tan; -fx-border-color: black;" text="Reset">
+         <font>
+            <Font name="SansSerif Bold" size="13.0" />
+         </font></Button>
+      <Label fx:id="instructions" alignment="CENTER" layoutX="26.0" layoutY="729.0" prefHeight="21.0" prefWidth="400.0" text="Select starting square" textAlignment="CENTER" textFill="#393430">
+         <font>
+            <Font name="SansSerif Bold Italic" size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="playButton" layoutX="40.0" layoutY="765.0" mnemonicParsing="false" onMouseClicked="#playWord" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: tan; -fx-border-color: black;" text="Play">
+         <font>
+            <Font name="SansSerif Bold" size="13.0" />
+         </font>
+      </Button>
+      <TextField fx:id="textField" layoutX="40.0" layoutY="765.0" onAction="#setBlankLetter" prefHeight="50.0" prefWidth="150.0" promptText="|" style="-fx-background-color: #faf5e8; -fx-border-color: black;">
+         <font>
+            <Font name="SansSerif Bold" size="24.0" />
+         </font>
+      </TextField>
+      <Label fx:id="playerScore" alignment="CENTER" layoutX="428.0" layoutY="729.0" prefHeight="21.0" prefWidth="150.0" textAlignment="CENTER">
+         <font>
+            <Font name="SansSerif Bold Italic" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="computerScore" alignment="CENTER" layoutX="580.0" layoutY="729.0" prefHeight="21.0" prefWidth="150.0" textAlignment="CENTER">
+         <font>
+            <Font name="SansSerif Bold Italic" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

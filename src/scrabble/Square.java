@@ -31,6 +31,10 @@ public class Square {
         return tile.getPoints();
     }
 
+    public int getRawPoints() {
+        return tile.getPoints();
+    }
+
     public void setTile(Tile tile) {
         this.tile = tile;
     }
