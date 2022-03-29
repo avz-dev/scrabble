@@ -1,5 +1,13 @@
 SCRABBLE
 
+HOW TO RUN
+- Solver:     
+      java -jar solver.jar dictionary.txt < input.txt > output.txt
+- 
+- Scrabble:   
+       java -jar scrabble.jar
+
+
 HOW TO PLAY
 
 - The player starts the game by either selecting a starting square or selecting "Play" to end their turn.
